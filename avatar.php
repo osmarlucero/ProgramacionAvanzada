@@ -21,29 +21,62 @@
        
         var cv = document.getElementById('micanvas');
         var ctx = cv.getContext('2d');
-        var color = "red";
-        var fig = "arc";
+        ctx.lineWidth = 2;
+        // Color de línea
+        ctx.strokeStyle = "#212121";
+        // Color de relleno
+        ctx.fillStyle = "BLACK";
         ctx.beginPath();
         //linea superior hat
         ctx.moveTo(150,50);
         ctx.lineTo(300,50);
-        ctx.moveTo(150,50);
+        ctx.lineTo(320,120);
         ctx.lineTo(120,120);
-        ctx.moveTo(300,50);
-        ctx.lineTo(320,120);
-        ctx.moveTo(120,120);
-        ctx.lineTo(320,120);
         ctx.closePath();
-        ctx.fillStyle = "#1565C0";
-        ctx.fill();
         ctx.stroke();
-       /* ctx.beginPath();
+        // Lo rellenamos
+        ctx.fill();
+        ctx.beginPath();
         ctx.scale(2,1);
         //           x, y, radiusX, radiusY, rotation, startAngle, endAngle
         ctx.ellipse(110, 120, 70, 15, Math.PI * 2, 0, 1* Math.PI);
         ctx.stroke();
         ctx.fill();
-        ctx.closePath();*/
+        ctx.closePath();
+        //fin sombrero
+        //inicio cara
+        ctx.beginPath();
+        ctx.moveTo(60, 130);
+        ctx.bezierCurveTo(100,520, 160,200, 160,130);
+        ctx.stroke();
+        //ctx.fillStyle = "#e0b390";
+        //ctx.fill();
+        ctx.closePath();
+        //fin cara
+        //inicio arrugas
+        ctx.beginPath()
+       // ctx.strokeStyle = "#e7aa7a";
+        ctx.moveTo(90,140);
+        ctx.lineTo(130,140);
+        ctx.moveTo(80,150);
+        ctx.lineTo(140,150);
+        ctx.moveTo(90,160);
+        ctx.lineTo(130,160);
+        ctx.stroke();
+        ctx.closePath();
+        //fin arrugas
+        //inicio lentes
+        ctx.beginPath();
+        ctx.moveTo(65,170);
+        ctx.lineTo(157,170);
+        ctx.lineTo(155, 195);
+        //ctx.bezierCurveTo(70,180, 160,200, 157,170);
+        ctx.stroke();
+        //ctx.fillStyle = "#e0b390";
+        //ctx.fill();
+        ctx.closePath();
+        //fin lentes
+
     </script>
     </body>
 </html>
