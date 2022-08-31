@@ -63,7 +63,7 @@
 
             bee.src = 'bee.png';
             flor.src = 'flor.png';
-            wall.src = '698633.png'
+            wall.src = 'meth.png'
 
             sonido1.src = 'los-frijoles_1.mp3';
 
@@ -78,10 +78,10 @@
 
             window.requestAnimationFrame(paint)
 
-            ctx.fillStyle = "pink";
+            ctx.fillStyle = "black";
             ctx.fillRect(0,0,500,500);
 
-            ctx.fillStyle = "black";
+            ctx.fillStyle = "#99f3f2";
             ctx.fillText('SCORE:'+score+'  SPEED:'+speed,30,20);
 
             player1.c = "black";
