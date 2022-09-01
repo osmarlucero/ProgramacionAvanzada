@@ -249,7 +249,18 @@
         }
 
     </script>
+<link rel="stylesheet" type="text/css" href="/mazing.css">
 
+<div id="maze_container"><!-- --></div>
+
+<script src="/maze.js"></script>
+<script>
+
+  let Maze = new MazeBuilder(16, 12);
+  Maze.placeKey();
+  Maze.display("maze_container");
+
+</script>
 </body>
 </html>
 
