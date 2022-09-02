@@ -22,7 +22,8 @@
     </canvas>
 
     <script type="text/javascript">
-        
+        //variables tiempo
+        //vartiables
         var cv = null;
         var ctx = null;
         var player1 = null;
@@ -31,8 +32,16 @@
 
         var super_x = 25, super_y = 40;
         var hex = [
-                    ["x","-","-","-","x","-","-","-","x"],
-                    ["x","-","-","-","x","-","s","-","x"]
+                    ["-","-","-","-","-","x","-","-","-","-","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","-","-","-","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","-","-","x","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","x","-","x","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","x","-","x","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","x","-","-","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","-","","-","-","-","-","-","-"],
+                    ["x","-","-","-","-","x","s","-","x","-","-","-","-","-","-"],
+                    ["x","-","-","-","-","x","s","-","x","-","-","-","-","-","-"],
+                    ["x","-","-","-","-","x","s","-","x","-","-","-","-","-","-"],
                 ];
                     //["x","-","-","-","x","-","-","-","x"];
         var direction = 'right';
@@ -44,24 +53,25 @@
         var wall = new Image();
         
         var sonido1 = new Audio()
-        var coord=0;
+        var coordx=0,coordy=40;
         var pause = false;
         var image = [];
         function makeWall(){
-            //lee todos los elementos del arreglo
-            for(var i=0; i<hex[0].length; i++)
-                for(var j=0; j<hex[i,0].length; j++){
-                    console.log(hex[i,j]);
-                    if(hex[i,j]=="x"){
-                        console.log("wallMoment");
-                        var wallMoment = null;
-                        wallMoment = new Cuadrado(coord,80,30,30,'gray');
+        //lee todos los elementos del arreglo
+        var wallMoment = null;
+            for(var i=0; i<hex.length; i++){
+                for(var j=0; j<hex[0].length; j++){
+                    if(hex[i][j]=="x"){
+                        wallMoment = new Cuadrado(coordx,coordy,30,30,'gray');
                         image.push(wallMoment);
-                    }       
+                    }    
+                coordx+=20;
                 }
+                coordy+=40;
+                coordx=0;
+            }
             //fin leida todos los elemtnos del arreglo
             
-            coord+=20;
         }
         function start(){
             cv = document.getElementById('mycanvas');
@@ -74,7 +84,7 @@
             flor.src = 'flor.png';
             wall.src = 'meth.png'
 
-            sonido1.src = 'los-frijoles_1.mp3';
+            sonido1.src = 'youre-goddamn-right.mp3';
 
             paint();
         } 
