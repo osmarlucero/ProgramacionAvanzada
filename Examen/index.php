@@ -30,7 +30,11 @@
         var pared = null;
 
         var super_x = 25, super_y = 40;
-        var hex = ["x","-","-","-","x","-","-","-","x"];
+        var hex = [
+                    ["x","-","-","-","x","-","-","-","x"],
+                    ["x","-","-","-","x","-","s","-","x"]
+                ];
+                    //["x","-","-","-","x","-","-","-","x"];
         var direction = 'right';
         var score = 0;
         var speed = 1;
@@ -38,28 +42,33 @@
         var bee = new Image();
         var flor = new Image();
         var wall = new Image();
-
+        
         var sonido1 = new Audio()
         var coord=0;
         var pause = false;
         var image = [];
-        function makeWall(type){
-            if(type=="x"){
-                var wallMoment = null;
-                wallMoment = new Cuadrado(coord,80,30,30,'gray');
-                image.push(wallMoment);
-            }
+        function makeWall(){
+            //lee todos los elementos del arreglo
+            for(var i=0; i<hex[0].length; i++)
+                for(var j=0; j<hex[i,0].length; j++){
+                    console.log(hex[i,j]);
+                    if(hex[i,j]=="x"){
+                        console.log("wallMoment");
+                        var wallMoment = null;
+                        wallMoment = new Cuadrado(coord,80,30,30,'gray');
+                        image.push(wallMoment);
+                    }       
+                }
+            //fin leida todos los elemtnos del arreglo
+            
             coord+=20;
-
         }
         function start(){
             cv = document.getElementById('mycanvas');
             ctx = cv.getContext('2d');
-            hex.forEach(element => makeWall(element));
+            makeWall();
             player1 = new Cuadrado(super_x,super_y,40,40,'red');
             player2 = new Cuadrado(generateRandomInteger(500),generateRandomInteger(500),40,40,'yellow');
-
-           // pared = new Cuadrado(40,80,30,300,'gray');
 
             bee.src = 'bee.png';
             flor.src = 'flor.png';
@@ -248,19 +257,7 @@
             return Math.floor(Math.random() * max) + 1;
         }
 
-    </script>
-<link rel="stylesheet" type="text/css" href="/mazing.css">
-
-<div id="maze_container"><!-- --></div>
-
-<script src="/maze.js"></script>
-<script>
-
-  let Maze = new MazeBuilder(16, 12);
-  Maze.placeKey();
-  Maze.display("maze_container");
-
-</script>
+    </script> 
 </body>
 </html>
 
