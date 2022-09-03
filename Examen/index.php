@@ -32,28 +32,42 @@
 
         var super_x = 25, super_y = 40;
         var hex = [
-                    ["-","-","-","-","-","x","-","-","-","-","-","-","-","-","x"],
-                    ["x","-","-","-","-","x","s","-","-","-","-","-","-","-","x"],
-                    ["x","-","-","-","-","x","s","-","-","x","-","-","-","-","x"],
-                    ["x","-","-","-","-","x","s","x","-","x","-","-","-","-","x"],
-                    ["x","-","-","-","-","x","s","x","-","x","-","-","-","-","x"],
-                    ["x","-","-","-","-","x","s","x","-","-","-","-","-","-","x"],
-                    ["x","-","-","-","-","x","s","-","","-","-","-","-","-","-"],
-                    ["x","-","-","-","-","x","s","-","x","-","-","-","-","-","-"],
-                    ["x","-","-","-","-","x","s","-","x","-","-","-","-","-","-"],
-                    ["x","-","-","-","-","x","s","-","x","-","-","-","-","-","-"],
+                    ["x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x"],
+                    ["x","-","-","x","-","x","s","-","-","x","-","x","-","-","x","x"],
+                    ["x","+","-","x","-","x","s","-","-","x","-","x","-","-","x","x"],
+                    ["x","-","-","x","-","x","s","x","-","-","-","-","-","-","x","x"],
+                    ["x","-","-","x","-","x","s","x","-","-","-","-","-","-","x","x"],
+                    ["x","-","-","-","-","-","s","x","-","-","-","x","-","-","x","x"],
+                    ["x","-","-","-","-","-","-","-","-","-","-","x","-","-","-","x"],
+                    ["x","-","-","x","-","-","-","-","-","-","-","x","-","-","-","x"],
+                    ["x","-","-","x","-","-","s","-","x","-","-","x","-","-","-","x"],
+                    ["x","-","-","x","-","-","s","-","x","-","-","-","-","-","-","x"],
+                    ["x","-","-","-","-","-","s","-","x","-","-","-","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","-","x","-","-","x","-","-","-","x"],
+                    ["x","-","-","-","-","x","s","-","-","x","x","x","-","-","-","x"],
+                    ["x","-","-","x","-","x","-","-","-","-","-","x","-","-","-","x"],
+                    ["x","x","x","x","x","x","x","x","x","x","x","x","x","-","*","x"],
                 ];
+        var hexTurn=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+        function turn(){
+            for (var x=0;x<hex.length;x++) {
+                for(var y=0;y<hex.length;y++) {
+                    hexTurn[y][hex.length-1-x] = hex[x][y];
+                }
+            }
+        }
                     //["x","-","-","-","x","-","-","-","x"];
         var direction = 'right';
         var score = 0;
         var speed = 1;
 
         var bee = new Image();
-        var flor = new Image();
+        var money = new Image();
         var wall = new Image();
         
         var sonido1 = new Audio()
-        var coordx=0,coordy=40;
+        var sonido2 = new Audio()
+        var coordx=0,coordy=50;
         var pause = false;
         var image = [];
         function makeWall(){
@@ -64,10 +78,16 @@
                     if(hex[i][j]=="x"){
                         wallMoment = new Cuadrado(coordx,coordy,30,30,'gray');
                         image.push(wallMoment);
-                    }    
-                coordx+=20;
+                    }else if(hex[i][j]=="*"){
+                        wallMoment = new Cuadrado(coordx,coordy,30,30,'gray');
+                        player2 = new Cuadrado(coordx,coordy,40,40,'yellow');
+                    }else if(hex[i][j]=="+"){
+                        player1 = new Cuadrado(coordx,coordy,40,40,'red');
+
+                    }
+                coordx+=30;
                 }
-                coordy+=40;
+                coordy+=30;
                 coordx=0;
             }
             //fin leida todos los elemtnos del arreglo
@@ -77,14 +97,13 @@
             cv = document.getElementById('mycanvas');
             ctx = cv.getContext('2d');
             makeWall();
-            player1 = new Cuadrado(super_x,super_y,40,40,'red');
-            player2 = new Cuadrado(generateRandomInteger(500),generateRandomInteger(500),40,40,'yellow');
-
+            turn();
             bee.src = 'bee.png';
-            flor.src = 'flor.png';
+            money.src = 'money.png';
             wall.src = 'meth.png'
 
             sonido1.src = 'youre-goddamn-right.mp3';
+            sonido2.src = 'main.mp3';
 
             paint();
         } 
@@ -109,7 +128,7 @@
             ctx.drawImage(bee,player1.x,player1.y)
 
             //player2.dibujar(ctx);
-            ctx.drawImage(flor,player2.x,player2.y)
+            ctx.drawImage(money,player2.x,player2.y)
 
             //pared.dibujar(ctx);
 
@@ -191,7 +210,7 @@
             
 
         document.addEventListener('keydown',function(e){
-
+            sonido2.play();
             //arriba
             if (e.which == 87 || e.which == 38) {
                 direction = 'up';
